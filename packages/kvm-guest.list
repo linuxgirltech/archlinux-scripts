@@ -1,4 +1,5 @@
 qemu-guest-agent
 spice-vdagent
+virglrenderer
 vulkan-virtio
 xf86-video-qxl
