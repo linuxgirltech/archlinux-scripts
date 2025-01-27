@@ -21,6 +21,7 @@ inotify-tools
 java-commons-lang
 lm_sensors
 lshw
+lsscsi
 mtools
 net-tools
 nmap
