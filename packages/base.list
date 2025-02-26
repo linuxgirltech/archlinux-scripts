@@ -6,4 +6,5 @@ lsb-release
 man-db
 man-pages
 memtest86+
+memtest86+-efi
 pacman-contrib
