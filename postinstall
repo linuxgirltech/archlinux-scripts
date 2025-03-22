@@ -108,6 +108,7 @@ function main {
           install_containers
           install_dev
           install_dev_aur
+          # install_nix
           # install_extra
           install_extra_kde
           # install_pipewire

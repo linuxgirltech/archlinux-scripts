@@ -273,6 +273,22 @@ function install_dev_aur {
   show_success "Development packages installed."
 }
 
+function install_nix {
+  local nix="${DIR}/packages/nix.list"
+  show_header "Installing Nix."
+  check_installed "${nix}"
+  show_success "Installed Nix."
+
+  show_info "Adding ${USER} to nix-users, enabling flakes, and starting systemd daemon."
+  sudo usermod -aG nix-users "${USER}"
+  sudo tee -a /etc/nix/nix.conf > /dev/null << EOF
+
+max-jobs = auto
+extra-experimental-features = nix-command flakes
+EOF
+  sudo systemctl enable nix-daemon
+}
+
 function _configure_ytdlp {
   local ytdlconf="${DIR}/configs/ytdl.conf"
   show_info "Installing yt-dlp/youtube-dl config."
@@ -739,6 +755,7 @@ function 03-packages {
     "Containers"
     "Development"
     "Development (AUR)"
+    "Nix"
     "Extra applications"
     "Extra KDE applications"
     "Emulators"
@@ -774,6 +791,7 @@ function 03-packages {
         install_containers
         install_dev
         install_dev_aur
+        install_nix
         install_extra
         install_extra_kde
         install_pipewire
@@ -832,6 +850,10 @@ function 03-packages {
         ;;
       "Development (AUR)")
         install_dev_aur
+        show_info "Main\n ${ENDBRANCH} Apps (Hit ENTER to see options again.)"
+        ;;
+      "Nix")
+        install_nix
         show_info "Main\n ${ENDBRANCH} Apps (Hit ENTER to see options again.)"
         ;;
       "Extra applications")
