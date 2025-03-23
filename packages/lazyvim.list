@@ -8,3 +8,5 @@ python-pynvim
 ripgrep
 tree-sitter-cli
 tree-sitter-grammars
+wl-clipboard
+xclip
