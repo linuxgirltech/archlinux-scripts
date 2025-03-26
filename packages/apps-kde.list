@@ -1,5 +1,6 @@
 ark
 bleachbit
+calibre
 dconf-editor
 feh
 ffmpeg
@@ -45,3 +46,4 @@ transmission-qt
 webp-pixbuf-loader
 xdg-utils
 xorg-xhost
+yt-dlp
