@@ -93,7 +93,8 @@ function main {
           # Set up network configuration
           install_network
           # install_discovery
-          install_firewall
+          # install_firewall
+          install_firewall_kde
           # install_tor
           # tunnel_pacman_tor
 
