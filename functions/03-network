@@ -120,8 +120,7 @@ function install_tor {
   show_success "Tor installed."
 
   show_info "Enabling and starting Tor service."
-  sudo systemctl enable tor
-  sudo systemctl start tor
+  sudo systemctl enable --now tor
 }
 
 function tunnel_pacman_tor {
