@@ -244,26 +244,6 @@ function install_dev {
   _install_julia
   _install_r
   _install_rust
-
-  show_info "Installing Vim packages."
-  mkdir -p "${vimpack}"
-
-  if ! [[ -e "${vimpack}/julia-vim" ]]; then
-    show_info "Installing julia-vim for Vim syntax highlighting."
-    git clone https://github.com/JuliaEditorSupport/julia-vim.git \
-      "${vimpack}/julia-vim"
-  fi
-
-  if ! [[ -e "${vimpack}/kotlin-vim" ]]; then
-    show_info "Installing kotlin-vim for Vim syntax highlighting."
-    git clone https://github.com/udalov/kotlin-vim.git \
-      "${vimpack}/kotlin-vim"
-  fi
-
-  if ! [[ -e "${vimpack}/Nvim-R" ]]; then
-    show_info "Installing Nvim-R."
-    git clone https://github.com/jalvesaq/Nvim-R.git "${vimpack}/Nvim-R"
-  fi
 }
 
 function install_dev_aur {
@@ -580,6 +560,26 @@ function install_vim {
   if command -v xdg-mime > /dev/null 2>&1; then
     show_info "Setting Vim MIME associations."
     xdg-mime default vim.desktop text/plain
+  fi
+
+  show_info "Installing Vim packages."
+  mkdir -p "${vimpack}"
+
+  if ! [[ -e "${vimpack}/julia-vim" ]]; then
+    show_info "Installing julia-vim for Vim syntax highlighting."
+    git clone https://github.com/JuliaEditorSupport/julia-vim.git \
+      "${vimpack}/julia-vim"
+  fi
+
+  if ! [[ -e "${vimpack}/kotlin-vim" ]]; then
+    show_info "Installing kotlin-vim for Vim syntax highlighting."
+    git clone https://github.com/udalov/kotlin-vim.git \
+      "${vimpack}/kotlin-vim"
+  fi
+
+  if ! [[ -e "${vimpack}/Nvim-R" ]]; then
+    show_info "Installing Nvim-R."
+    git clone https://github.com/jalvesaq/Nvim-R.git "${vimpack}/Nvim-R"
   fi
 
   show_info "Install local wordlist."
