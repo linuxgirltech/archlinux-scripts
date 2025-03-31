@@ -356,8 +356,12 @@ function install_kvm {
     sudo sed -i "/^hosts/{s/files/files libvirt libvirt_guest/g}" "${nsconf}"
   fi
 
-  show_info "Setting libvirt to use iptables (for UFW compatibility)."
-  sudo sed -i 's/^#\?firewall_backend = "nftables"/firewall_backend = "iptables"/g' "${libvirtnetworkconf}"
+  if pacman -Qi ufw > /dev/null 2>&1; then
+    show_info "Setting libvirt to use iptables (for UFW compatibility)."
+    sudo sed -i 's/^#\?firewall_backend = "nftables"/firewall_backend = "iptables"/g' "${libvirtnetworkconf}"
+  else
+    show_warning "Adjust the 'firewall_backend' to 'iptables' in ${libvirtnetworkconf@Q} if UFW is ever installed."
+  fi
 
   sudo systemctl enable libvirtd
   sudo systemctl start libvirtd
