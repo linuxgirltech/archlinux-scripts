@@ -363,8 +363,7 @@ function install_kvm {
     show_warning "Adjust the 'firewall_backend' to 'iptables' in ${libvirtnetworkconf@Q} if UFW is ever installed."
   fi
 
-  sudo systemctl enable libvirtd
-  sudo systemctl start libvirtd
+  sudo systemctl enable --now libvirtd
 }
 
 function install_kvm_guest {
