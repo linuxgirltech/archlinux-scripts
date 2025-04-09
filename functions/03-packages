@@ -259,8 +259,7 @@ function install_nix {
   check_installed "${nix}"
   show_success "Installed Nix."
 
-  show_info "Adding ${USER} to nix-users, enabling flakes, and starting systemd daemon."
-  sudo usermod -aG nix-users "${USER}"
+  show_info "Enabling flakes and starting systemd daemon."
   sudo tee -a /etc/nix/nix.conf > /dev/null << EOF
 
 max-jobs = auto
