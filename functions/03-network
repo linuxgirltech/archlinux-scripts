@@ -149,6 +149,7 @@ function 03-network {
     "Networking"
     "Local discovery"
     "Firewall"
+    "Firewall KDE"
     "Install Tor"
     "Tunnel pacman over Tor")
   local option
