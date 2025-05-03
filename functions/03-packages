@@ -448,6 +448,16 @@ function install_music {
   cp -f "${ncmpcppconf}" "${ncmpcppdir}/config"
 }
 
+function install_ollama {
+  local ollama="${DIR}/packages/ollama.list"
+  show_header "Installing ollama."
+  check_installed "${ollama}"
+  show_success "Ollama installed."
+
+  show_info "Enabling ollama systemd service."
+  sudo systemctl enable --now ollama.service
+}
+
 function install_texlive {
   local texlive="${DIR}/packages/texlive.list"
 
@@ -766,6 +776,7 @@ function 03-packages {
     "Messaging"
     "MinGW"
     "Music"
+    "Ollama"
     "Printing"
     "PipeWire"
     "TeX Live"
@@ -804,6 +815,7 @@ function 03-packages {
         install_messaging
         install_mingw
         install_music
+        install_ollama
         install_texlive
         install_torbrowser
         install_vim
@@ -888,6 +900,10 @@ function 03-packages {
         ;;
       "Music")
         install_music
+        show_info "Main\n ${ENDBRANCH} Apps (Hit ENTER to see options again.)"
+        ;;
+      "Ollama")
+        install_ollama
         show_info "Main\n ${ENDBRANCH} Apps (Hit ENTER to see options again.)"
         ;;
       "PipeWire")

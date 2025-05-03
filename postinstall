@@ -120,6 +120,7 @@ function main {
           install_messaging
           # install_mingw
           install_music
+          # install_ollama
           install_texlive
           # install_torbrowser
           # install_vim
