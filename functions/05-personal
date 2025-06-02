@@ -1735,7 +1735,7 @@ function set_default_kernel {
 
   show_info "Setting default boot kernel to ${KERNEL}."
 
-  if [ -f "${grubdefault}" ]; then
+  if [ -f "${grubcfg}" ]; then
     sudo sed -i "s/^GRUB_DEFAULT=.*$/GRUB_DEFAULT='Advanced options for Arch Linux>Arch Linux, with Linux ${KERNEL}'/g" ${grubdefault}
     sudo grub-mkconfig -o ${grubcfg}
   fi
