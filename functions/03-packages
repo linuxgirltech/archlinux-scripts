@@ -249,7 +249,7 @@ function install_dev {
 function install_dev_aur {
   local devaur="${DIR}/packages/dev-aur.list"
   show_header "Installing development packages from AUR."
-  check_installed "${devaur}"
+  check_aur_installed "${devaur}"
   show_success "Development packages installed."
 }
 
