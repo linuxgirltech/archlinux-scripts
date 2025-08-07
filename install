@@ -87,10 +87,6 @@ function main {
           arch-chroot /mnt /bin/bash -c "make_luks_key"
       fi
       ;;
-    rEFInd)
-      SCHEME="${SCHEME}" DEVICE="${DEVICE}" \
-        arch-chroot /mnt /bin/bash -c "install_refind"
-      ;;
     systemd-boot)
       cp -f \
         "${DIR}/hooks/efi-update@.path" \
