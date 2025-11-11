@@ -92,5 +92,7 @@ tesseract-data-eng
 tidy
 tk
 uncrustify
+xmlstarlet
 yarn
 yq
+zig
