@@ -105,6 +105,7 @@ function remove_entry {
       exit 1
     fi
   else
+    echo "ERROR: Cannot remove default entry ${KERNEL@Q}."
     exit 1
   fi
 }
