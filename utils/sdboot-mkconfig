@@ -102,6 +102,7 @@ function remove_entry {
         "${EFIDIR}/loader/entries/${KERNEL}.conf" \
         "${EFIDIR}/loader/entries/${KERNEL}-fallback.conf"
     else
+      echo "ERROR: Cannot find loader entry for ${KERNEL@Q}." >&2
       exit 1
     fi
   else
