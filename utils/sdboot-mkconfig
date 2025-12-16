@@ -111,10 +111,7 @@ function remove_entry {
   fi
 }
 
-if ! EFIDIR="$(bootctl -p)"; then
-  exit 1
-fi
-
+EFIDIR="$(bootctl -p)"
 MODE="${1:-print}"
 KERNEL="${2:-all}"
 
