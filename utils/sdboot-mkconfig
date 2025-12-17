@@ -27,6 +27,7 @@ function get_cmdline {
     if [ -f "${EFIDIR}/loader/loader.conf" ]; then
       config=$(sed -n "s/^default\s\+\(.*\)/\1/p" "${EFIDIR}/loader/loader.conf")
     else
+      echo "ERROR: ${loaderconf@Q} does not exist."
       exit 1
     fi
   else
@@ -36,10 +37,12 @@ function get_cmdline {
   if [ -f "${EFIDIR}/loader/entries/${config}" ]; then
     cmdline=$(sed -n "s/^options\s\+\(.*\)/\1/p" "${EFIDIR}/loader/entries/${config}")
   else
+    echo "ERROR: ${entryconfig@Q} does not exist."
     exit 1
   fi
 
   if [[ -z "${cmdline}" ]]; then
+    echo "ERROR: Failed to parse kernel command line for ${entryconfig@Q}."
     exit 1
   fi
 
@@ -56,6 +59,7 @@ function copy_images {
       "/boot/initramfs-${KERNEL}-fallback.img" \
       "${EFIDIR}"
   else
+    echo "ERROR: Failed to copy ${KERNEL@Q}." >&2
     exit 1
   fi
 }
@@ -70,6 +74,8 @@ initrd	/initramfs-${image}.img
 options	${CMDLINE}"
     if ! cmp -s "${EFIDIR}/loader/entries/${image}.conf" <(echo "${tmp}"); then
       echo "${tmp}" > "${EFIDIR}/loader/entries/${image}.conf"
+    else
+      echo "Entry '${EFIDIR}/loader/entries/${image}.conf' unchanged."
     fi
   done
 }
