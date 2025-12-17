@@ -23,9 +23,10 @@ function get_cmdline {
   local config
   local cmdline
 
+  local loaderconf="${EFIDIR}/loader/loader.conf"
   if [[ "${1}" = "default" ]]; then
-    if [ -f "${EFIDIR}/loader/loader.conf" ]; then
-      config=$(sed -n "s/^default\s\+\(.*\)/\1/p" "${EFIDIR}/loader/loader.conf")
+    if [ -f "${loaderconf}" ]; then
+      config=$(sed -n "s/^default\s\+\(.*\)/\1/p" "${loaderconf}")
     else
       echo "ERROR: ${loaderconf@Q} does not exist."
       exit 1
@@ -34,8 +35,9 @@ function get_cmdline {
     config=$(basename "${1}")
   fi
 
-  if [ -f "${EFIDIR}/loader/entries/${config}" ]; then
-    cmdline=$(sed -n "s/^options\s\+\(.*\)/\1/p" "${EFIDIR}/loader/entries/${config}")
+  local entryconfig="${EFIDIR}/loader/entries/${config}"
+  if [ -f "${entryconfig}" ]; then
+    cmdline=$(sed -n "s/^options\s\+\(.*\)/\1/p" "${entryconfig}")
   else
     echo "ERROR: ${entryconfig@Q} does not exist."
     exit 1
