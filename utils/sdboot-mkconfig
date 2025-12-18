@@ -53,13 +53,16 @@ function get_cmdline {
 
 function copy_images {
   if [ -f "/boot/vmlinuz-${KERNEL}" ] &&
-     [ -f "/boot/initramfs-${KERNEL}.img" ] &&
-     [ -f "/boot/initramfs-${KERNEL}-fallback.img" ]; then
+     [ -f "/boot/initramfs-${KERNEL}.img" ]; then
     cp -af \
       "/boot/vmlinuz-${KERNEL}" \
       "/boot/initramfs-${KERNEL}.img" \
-      "/boot/initramfs-${KERNEL}-fallback.img" \
       "${EFIDIR}"
+    if [ -f "/boot/initramfs-${KERNEL}-fallback.img" ]; then
+      cp -af \
+        "/boot/initramfs-${KERNEL}-fallback.img" \
+        "${EFIDIR}"
+    fi
   else
     echo "ERROR: Failed to copy ${KERNEL@Q}." >&2
     exit 1
@@ -84,7 +87,11 @@ options	${CMDLINE}"
 
 function print_entries {
   local image
-  for image in "${KERNEL}" "${KERNEL}-fallback"; do
+  local images=("${KERNEL}")
+  if [ -f "/boot/initramfs-${KERNEL}-fallback.img" ]; then
+    images+=("${KERNEL}-fallback")
+  fi
+  for image in "${images[@]}"; do
     cat << EOF
 title	Arch Linux, ${image/-fallback/ (fallback)}
 linux	/vmlinuz-${image/-fallback/}
@@ -100,15 +107,17 @@ function remove_entry {
   if ! [ "${default}" = "${KERNEL}.conf" ]; then
     if [ -f "${EFIDIR}/vmlinuz-${KERNEL}" ] &&
        [ -f "${EFIDIR}/initramfs-${KERNEL}.img" ] &&
-       [ -f "${EFIDIR}/initramfs-${KERNEL}-fallback.img" ] &&
-       [ -f "${EFIDIR}/loader/entries/${KERNEL}.conf" ] &&
-       [ -f "${EFIDIR}/loader/entries/${KERNEL}-fallback.conf" ]; then
+       [ -f "${EFIDIR}/loader/entries/${KERNEL}.conf" ]; then
       rm \
         "${EFIDIR}/vmlinuz-${KERNEL}" \
         "${EFIDIR}/initramfs-${KERNEL}.img" \
-        "${EFIDIR}/initramfs-${KERNEL}-fallback.img" \
-        "${EFIDIR}/loader/entries/${KERNEL}.conf" \
-        "${EFIDIR}/loader/entries/${KERNEL}-fallback.conf"
+        "${EFIDIR}/loader/entries/${KERNEL}.conf"
+      if [ -f "${EFIDIR}/initramfs-${KERNEL}-fallback.img" ] &&
+         [ -f "${EFIDIR}/loader/entries/${KERNEL}-fallback.conf" ]; then
+        rm \
+          "${EFIDIR}/initramfs-${KERNEL}-fallback.img" \
+          "${EFIDIR}/loader/entries/${KERNEL}-fallback.conf"
+      fi
     else
       echo "ERROR: Cannot find loader entry for ${KERNEL@Q}." >&2
       exit 1
