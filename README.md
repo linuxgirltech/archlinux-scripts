@@ -31,7 +31,7 @@ Windows / MacOS for USB drive installations.
 
 The rough partition scheme is:
 
-```
+```txt
 1. BIOS compatibility partition, empty if GRUB not used (1 MiB)
 2. EFI partition (512 MiB)
 3. Share partition (optional)
@@ -57,7 +57,7 @@ Installation options will be queries as the script runs.
 
 #### Partitioning
 
-```
+```txt
 1) Back
 2) LVM on LUKS
 3) LVM
@@ -71,7 +71,7 @@ Installation options will be queries as the script runs.
 
 #### Boot system
 
-```
+```txt
 1) Back
 2) GRUB
 3) systemd-boot
@@ -116,7 +116,7 @@ connection is active. The rest should be self explanatory.
 
 ### Options
 
-```
+```txt
 1) Quit                 4) Miscellaneous        7) Applications
 2) Autopilot            5) Desktop environment  8) Themes
 3) Base                 6) Network tools        9) Personalization
@@ -128,7 +128,7 @@ Automatically install (without prompting) packages and configs.
 
 #### 3) Base
 
-```
+```txt
 1) Back                   5) Firmware              9) Pacman styling
 2) All                    6) Updates              10) Pacman parallel
 3) Base packages          7) Enable multilib      11) Disable system beep
@@ -156,7 +156,7 @@ Automatically install (without prompting) packages and configs.
 
 #### 4) Miscellaneous
 
-```
+```txt
 1) Back                     5) Linux RT kernel         9) Laptop tools
 2) All                      6) Linux RT LTS kernel    10) Plymouth
 3) Linux hardened kernel    7) Linux zen kernel       10) zsh
@@ -184,7 +184,7 @@ Automatically install (without prompting) packages and configs.
 
 #### 5) Desktop environment
 
-```
+```txt
 1) Back
 2) All
 3) GNOME
@@ -200,7 +200,7 @@ Automatically install (without prompting) packages and configs.
 
 #### 6) Network tools
 
-```
+```txt
 1) Back                    4) Local discovery         7) Tunnel pacman over tor
 2) All                     5) Firewall
 3) Networking              6) Install tor
@@ -220,7 +220,7 @@ Automatically install (without prompting) packages and configs.
 
 #### 7) Applications
 
-```
+```txt
  1) Back                            16) KVM (host)
  2) All                             17) KVM (guest)
  3) 3D acceleration                 18) Messaging
@@ -307,7 +307,7 @@ Automatically install (without prompting) packages and configs.
 
 #### 8) Themes
 
-```
+```txt
 1) Back                           8) Materia (KDE)
 2) All                            9) Fonts
 3) Arc (GTK)                     10) Papirus (icons)
@@ -360,7 +360,7 @@ Automatically install (without prompting) packages and configs.
 
 #### 9) Personalization
 
-```
+```txt
  1) Back                            12) Hide Avahi programs
  2) All                             13) Import KDE settings
  3) Select system fonts             14) Import application dconf
